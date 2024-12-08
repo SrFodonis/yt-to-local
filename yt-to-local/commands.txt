@@ -1,0 +1,8 @@
+yt-dlp {PLAYLIST_URL} --get-id --flat-playlist -J
+- Gives all ids from all videos in the playlist at the top, right under, gives full JSON data from playlist
+
+yt-dlp '{PLAYLIST_URL}' -I0 -J
+- Gets simple JSON data from playlist
+
+yt-dlp {PLAYLIST_URL} --skip-download --flat-playlist -J
+- Gets full JSON data from playlist, including video entries
