@@ -1,4 +1,7 @@
-import json, subprocess, shlex, pathlib
+import json
+import subprocess
+import shlex
+import pathlib
 from time import sleep
 
 PLAYLIST_URLS = [
@@ -26,7 +29,7 @@ def download_JSON() -> list:
             yt_json = subprocess.check_output(
                 shlex.split(ytdlp_command)
             )
-        except:
+        except Exception:
             print("-- ERROR! --")
             print(f"Error handling playlist: {url}\nIs the playlist private?")
             exit()
