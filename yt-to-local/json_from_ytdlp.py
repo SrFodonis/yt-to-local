@@ -26,10 +26,10 @@ with open("test_file.json", "w") as file:
     file.write(formatted_json)
 
 # Get playlist_control-style formatted file
-
-videos = list()
+# Get a list of all the video entries in the playlist
+entries = list()
 for entry in playlist_json["entries"]:
-    videos.append(
+    entries.append(
         {
             "id": entry["id"],
             "url": entry["url"],
@@ -38,7 +38,16 @@ for entry in playlist_json["entries"]:
         }
     )
 
-with open("test_dump.json", "w") as file:
+# Create full playlist_control info
+playlist_control = [{
+    "id": playlist_json["id"],
+    "title": playlist_json["title"],
+    "playlist_count": playlist_json["playlist_count"],
+    "entries": entries
+}]
+
+
+with open("test_playlist_control.json", "w") as file:
     file.write(
-        json.dumps(videos, indent=4)
+        json.dumps(playlist_control, indent=4)
     )
