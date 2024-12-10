@@ -57,5 +57,5 @@ for entry in playlist_json["entries"]:
 with open("test_dump.json", "w") as file:
     for video in videos:
         file.write(
-            f"{video.id}\n{video.url}\n{video.title}\n{video.file_type}\n\n"
+            json.dumps(video.__dict__, indent=4)
         )
