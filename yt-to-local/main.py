@@ -60,5 +60,7 @@ def get_playlist_info_json(url: str, only_id: bool) -> str:
     return json.loads(raw_json)
 
 
+# def get_discrepancy(playlist_local: dict, playlist_yt: dict) -> list:
+
 if __name__=="__main__":
     main()
