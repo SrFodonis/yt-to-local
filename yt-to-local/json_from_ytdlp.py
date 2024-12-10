@@ -8,7 +8,7 @@ PLAYLIST_URLS = [
 ]
 YT_DLP_OPTIONS = "--skip-download --flat-playlist -J"
 
-PULL_FROM_YT = True
+PULL_FROM_YT = False
 
 def download_JSON() -> list:
     playlists = list()
@@ -57,7 +57,6 @@ if PULL_FROM_YT:
         )
 else:
     playlists = load_local_JSON()
-
 
 
 # Get playlist_control-style formatted file
