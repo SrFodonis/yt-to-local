@@ -1,5 +1,5 @@
--- This is a comment, everything from the -- onwards should be ignored
-https://www.youtube.com/playlist?list=PLhmaCTLQti_CQ50HGv1lvmVgSsUrpIqUj -- Allowing for commenting the title of the playlist
-https://www.youtube.com/playlist?list=PLhmaCTLQti_AOxL76JWDu6UEpsWc1h2DQ
+-- This is a comment, everything from the -- onwards will be ignored, allowing for commenting the title of the playlist
+https://www.youtube.com/playlist?list=PLhmaCTLQti_CQ50HGv1lvmVgSsUrpIqUj -- Hippity hoppity your ass shall be my property
+https://www.youtube.com/playlist?list=PLhmaCTLQti_AOxL76JWDu6UEpsWc1h2DQ -- Oops! All Virtual Women
 https://www.youtube.com/playlist?list=PLhmaCTLQti_BUDyiYdDHae7bErXZZdGSe
 https://www.youtube.com/playlist?list=PLhmaCTLQti_A0hJRRqKzlRAGt583XoXHZ
