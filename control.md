@@ -135,6 +135,10 @@ Find_discrepancy is gonna return a dictionary with lists
 This makes it easier to simply pass the "excess" list to trash
 And the "missing" list to the downloader
 
+---------
+Next to add:
+	- Preflight_checks
+		- playlist_control not exists -> create empty
 
 
 ---------
