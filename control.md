@@ -134,3 +134,22 @@ Find_discrepancy is gonna return a dictionary with lists
 
 This makes it easier to simply pass the "excess" list to trash
 And the "missing" list to the downloader
+
+
+
+---------
+
+Target directory file structure
+target
+	|
+	|-playlist_urls.txt
+	|	| Text file from where the playlist urls are extracted
+	|
+	|-downloads/
+	|	| All the downloaded videos
+	|
+	|-JSONs/
+		| All the necessary JSONs
+			| playlist_control
+			| temp_yt_information
+			| config?
