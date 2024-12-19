@@ -28,7 +28,7 @@ def preflight_checks():
             file.write(
                 (
                 "-- Paste playlists URLs here, separated by new lines\n"
-                "-- Coments may be used by typing -- at the beggining of a line\n"
+                "-- Comments may be used by typing -- at the beggining of a line\n"
                 "-- Remember to write the name of the playlist for ease of use\n"
                 )
             )
