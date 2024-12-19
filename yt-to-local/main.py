@@ -1,20 +1,19 @@
 import re
 from os import path, makedirs
 
-TARGET_DIR = "/home/phoenix_wsl/yt-to-local/test_target"
+TARGET_DIR = "/home/phoenix_wsl/repos/yt-to-local/test_target"
 
 def main():
     preflight_checks()
     urls = url_parser("playlist_urls.txt")
+    print(urls)
 
 
 def preflight_checks():
 
     # Make sure all necessary directories and files exist
     ## Target directory for all operations
-    if target_existance_checker("dir", TARGET_DIR, False):
-        print(f"Target directory {TARGET_DIR} not found.")
-        raise FileNotFoundError("Target directory does not exist")
+    target_existance_checker("dir", TARGET_DIR, True)
     
     ## Downloads folder
     target_existance_checker("dir", f"{TARGET_DIR}/downloads", True)
@@ -25,13 +24,17 @@ def preflight_checks():
     ## playlists_urls.txt 
     if not path.exists(f"{TARGET_DIR}/playlist_urls.txt"):
         # Create playlist_urls.txt
-        with open("playlist_urls.txt", "w") as file:
+        with open(f"{TARGET_DIR}/playlist_urls.txt", "w") as file:
             file.write(
-                """
-                -- Paste playlists URLs here, separated by new lines\n
-                -- coments may be used by typing -- at the beggining of a line\n
-                """
+                (
+                "-- Paste playlists URLs here, separated by new lines\n"
+                "-- Coments may be used by typing -- at the beggining of a line\n"
+                "-- Remember to write the name of the playlist for ease of use\n"
+                )
             )
+        print(f"Created file at {TARGET_DIR}/playlist_urls.txt")
+    
+    # 
 
 
 def target_existance_checker(type: str, full_path: str, if_missing_create: bool) -> bool:
@@ -47,7 +50,7 @@ def target_existance_checker(type: str, full_path: str, if_missing_create: bool)
     elif type.lower() == "dir":
         exists = path.isdir(full_path)
     else:
-        raise ValueError("Type must be 'file' or 'dir'")
+        raise ValueError("\nType must be 'file' or 'dir'")
         
     # Create if missing and requested
     if not exists and if_missing_create:
@@ -55,6 +58,8 @@ def target_existance_checker(type: str, full_path: str, if_missing_create: bool)
             makedirs(full_path)
         elif type.lower() == "file":
             open(full_path, 'a').close()
+
+        print(f"Created {type} at {full_path}")
         return True
         
     return exists
