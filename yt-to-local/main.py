@@ -6,34 +6,24 @@ from os import path, makedirs
 TARGET_DIR = "/home/phoenix_wsl/repos/yt-to-local/test_target"
 
 def main():
-    preflight_checks()
+    config = load_config()
+    preflight_checks(config=config)
     urls = url_parser("playlist_urls.txt")
-    print(urls)
+    print(urls, config)
 
 
-def preflight_checks():
+def preflight_checks(config: dict):
+
+    target_dir = config["target_dir"]
 
     # Make sure all necessary directories and files exist
     ## Target directory for all operations
-    target_existance_checker("dir", TARGET_DIR, True)
-    
-    ## playlists_urls.txt 
-    # if not path.exists(f"{TARGET_DIR}/playlist_urls.txt"):
-    #     # Create playlist_urls.txt
-    #     with open(f"{TARGET_DIR}/playlist_urls.txt", "w") as file:
-    #         file.write(
-    #             (
-    #             "-- Paste playlists URLs here, separated by new lines\n"
-    #             "-- Comments may be used by typing -- at the beggining of a line\n"
-    #             "-- Remember to write the name of the playlist for ease of use\n"
-    #             )
-    #         )
-    #     print(f"Created file at {TARGET_DIR}/playlist_urls.txt")
+    target_existance_checker("dir", target_dir, True)
     
     ## playlists_urls.txt
-    if not target_existance_checker("file", f"{TARGET_DIR}/playlist_urls.txt", False):
+    if not target_existance_checker("file", f"{target_dir}/playlist_urls.txt", False):
         # Write default content
-        with open(f"{TARGET_DIR}/playlist_urls.txt", "w") as file:
+        with open(f"{target_dir}/playlist_urls.txt", "w") as file:
             file.write(
                 (
                 "-- Paste playlists URLs here, separated by new lines\n"
@@ -42,19 +32,19 @@ def preflight_checks():
                 )
             )
         
-        print(f"Created file at {TARGET_DIR}/playlist_urls.txt")
+        print(f"Created file at {target_dir}/playlist_urls.txt")
 
     ## Downloads folder
-    target_existance_checker("dir", f"{TARGET_DIR}/downloads", True)
+    target_existance_checker("dir", f"{target_dir}/downloads", True)
 
     ## JSONs folder
-    target_existance_checker("dir", f"{TARGET_DIR}/jsons", True)
+    target_existance_checker("dir", f"{target_dir}/jsons", True)
 
     ## jsons/ config.json
-    target_existance_checker("file", f"{TARGET_DIR}/jsons/config.json", True)
+    target_existance_checker("file", f"{target_dir}/jsons/config.json", True)
 
     ## jsons/ playlist_control.json
-    target_existance_checker("file", f"{TARGET_DIR}/jsons/playlist_control.json", True)
+    target_existance_checker("file", f"{target_dir}/jsons/playlist_control.json", True)
 
 def load_config():
     """
@@ -85,18 +75,23 @@ def get_config() -> dict:
     config = dict()
 
     # Get target directory
-    print("Please enter the following information to configure the program:\n\n")
+    print("\nPlease enter the following information to configure the program:\n")
     target_dir = input("Enter the full path of the target directory: ")
     if not path.isdir(target_dir):
         print("Path not found, directory and all necessary files will be automatically created.")
         print(f"Path: {target_dir}")
-        confirmation = print("Do you wish to proceed? (y/n): ")
+        confirmation = input("Do you wish to proceed? (y/n): ")
         if not confirmation.lower() in ["y", "yes"]:
             print("Exiting program...")
             exit()
 
     config["target_dir"] = target_dir
     print(f"Path: {target_dir} selected")
+
+
+    # Save configuration
+    with open(f"{target_dir}/jsons/config.json", "w") as file:
+        json.dump(config, file, indent=4) # Pretty print for easier user modification
     
 
     

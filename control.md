@@ -139,7 +139,15 @@ And the "missing" list to the downloader
 Next to add:
 	- Preflight_checks
 		- playlist_control not exists -> create empty
-
+	- config.json
+		- Add existance check to preflight_checks
+		- add cli argument to reset config
+			- Add url passed as argument to playlist_control and playlist_urls.txt
+		- Select preferred download format? Select video or audio only?
+-----------------------------
+!!!!!!!!!!!!!!!!!!!!!! MOVE CONFIG LOADING AND GETTING INTO preflight_checks !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+run programm with -rc flag to see why
+/home/phoenix_wsl/repos/yt-to-local/test_2
 
 ---------
 
