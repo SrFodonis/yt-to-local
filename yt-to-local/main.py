@@ -1,4 +1,6 @@
 import re
+import json
+import argparse
 from os import path, makedirs
 
 TARGET_DIR = "/home/phoenix_wsl/repos/yt-to-local/test_target"
@@ -15,15 +17,22 @@ def preflight_checks():
     ## Target directory for all operations
     target_existance_checker("dir", TARGET_DIR, True)
     
-    ## Downloads folder
-    target_existance_checker("dir", f"{TARGET_DIR}/downloads", True)
-
-    ## JSONs folder
-    target_existance_checker("dir", f"{TARGET_DIR}/jsons", True)
-
     ## playlists_urls.txt 
-    if not path.exists(f"{TARGET_DIR}/playlist_urls.txt"):
-        # Create playlist_urls.txt
+    # if not path.exists(f"{TARGET_DIR}/playlist_urls.txt"):
+    #     # Create playlist_urls.txt
+    #     with open(f"{TARGET_DIR}/playlist_urls.txt", "w") as file:
+    #         file.write(
+    #             (
+    #             "-- Paste playlists URLs here, separated by new lines\n"
+    #             "-- Comments may be used by typing -- at the beggining of a line\n"
+    #             "-- Remember to write the name of the playlist for ease of use\n"
+    #             )
+    #         )
+    #     print(f"Created file at {TARGET_DIR}/playlist_urls.txt")
+    
+    ## playlists_urls.txt
+    if not target_existance_checker("file", f"{TARGET_DIR}/playlist_urls.txt", False):
+        # Write default content
         with open(f"{TARGET_DIR}/playlist_urls.txt", "w") as file:
             file.write(
                 (
@@ -32,9 +41,86 @@ def preflight_checks():
                 "-- Remember to write the name of the playlist for ease of use\n"
                 )
             )
+        
         print(f"Created file at {TARGET_DIR}/playlist_urls.txt")
+
+    ## Downloads folder
+    target_existance_checker("dir", f"{TARGET_DIR}/downloads", True)
+
+    ## JSONs folder
+    target_existance_checker("dir", f"{TARGET_DIR}/jsons", True)
+
+    ## jsons/ config.json
+    target_existance_checker("file", f"{TARGET_DIR}/jsons/config.json", True)
+
+    ## jsons/ playlist_control.json
+    target_existance_checker("file", f"{TARGET_DIR}/jsons/playlist_control.json", True)
+
+def load_config():
+    """
+    If the configuration already exists, load it and return as dictionary.
+    If not, prompt user for configuration, save and return as dictionary.
+    """
+
+    args = get_cli_args()
+    if args.reset_config:
+        return get_config()
+
+    with open(f"{TARGET_DIR}/jsons/config.json", "r") as file:
+        try:
+            config = json.load(file)
+        except json.JSONDecodeError:
+            return get_config()
+
+    return config
+        
+
+
+
+def get_config() -> dict:
+    """
+    Prompt user for configuration, return it and save it to config.json
+    """
+
+    config = dict()
+
+    # Get target directory
+    print("Please enter the following information to configure the program:\n\n")
+    target_dir = input("Enter the full path of the target directory: ")
+    if not path.isdir(target_dir):
+        print("Path not found, directory and all necessary files will be automatically created.")
+        print(f"Path: {target_dir}")
+        confirmation = print("Do you wish to proceed? (y/n): ")
+        if not confirmation.lower() in ["y", "yes"]:
+            print("Exiting program...")
+            exit()
+
+    config["target_dir"] = target_dir
+    print(f"Path: {target_dir} selected")
     
-    # 
+
+    
+def get_cli_args() -> argparse.Namespace:
+        parser = argparse.ArgumentParser(
+            prog="yt-to-local",
+            description="Download YouTube playlist's videos to local storage."
+        )
+
+        # parser.add_argument(
+        #     "-u", 
+        #     "--url", 
+        #     type=str, 
+        #     help="URL of playlist to download and add to tracker."
+        #     )
+
+        parser.add_argument(
+            "-rc", 
+            "--reset-config", 
+            action="store_true", 
+            help="Prompt user for program config."
+            )
+
+        return parser.parse_args()
 
 
 def target_existance_checker(type: str, full_path: str, if_missing_create: bool) -> bool:
