@@ -1,17 +1,21 @@
 import re
 import json
 import argparse
-from os import path, makedirs
+from os import path, makedirs, environ
 
-TARGET_DIR = "/home/phoenix_wsl/repos/yt-to-local/test_target"
+CONFIG_DIR = f"/home/{environ['USER']}/.config/yt-to-local"
 
 def main():
     args = init_cli_args()
     if args.setup:
-        setup()
+        first_time_setup()
         exit()
 
-    
+    # Load configuration
+    with open(f"{CONFIG_DIR}/config.json", "r") as file:
+        config = json.load(file)
+
+    target_path = config["target_path"]
 
 
 # setup()
@@ -19,7 +23,7 @@ def main():
 # get config information from user and save
 # notify that the program can be run normally now
 
-def setup() -> None:
+def first_time_setup() -> None:
 
     """Initialize the application's directory structure and configuration.
     
@@ -72,10 +76,10 @@ def setup() -> None:
 def create_files(target_path : str) -> None:
     # Make sure all necessary directories and files exist
     ## Target directory for all operations
-    target_existance_checker("dir", target_path, True)
+    existance_checker("dir", target_path, True)
     
     ## playlists_urls.txt
-    if not target_existance_checker("file", f"{target_path}/playlist_urls.txt", False):
+    if not existance_checker("file", f"{target_path}/playlist_urls.txt", False):
         # Write default content
         with open(f"{target_path}/playlist_urls.txt", "w") as file:
             file.write(
@@ -89,36 +93,37 @@ def create_files(target_path : str) -> None:
         print(f"Created file at {target_path}/playlist_urls.txt")
 
     ## Downloads folder
-    target_existance_checker("dir", f"{target_path}/downloads", True)
+    existance_checker("dir", f"{target_path}/downloads", True)
 
     ## JSONs folder
-    target_existance_checker("dir", f"{target_path}/jsons", True)
+    existance_checker("dir", f"{target_path}/jsons", True)
 
-    ## jsons/ config.json
-    target_existance_checker("file", f"{target_path}/jsons/config.json", True)
+    ## Configuration dir and file
+    existance_checker("dir", CONFIG_DIR, True)
+    existance_checker("file", f"{CONFIG_DIR}/config.json", True)
 
     ## jsons/ playlist_control.json
-    target_existance_checker("file", f"{target_path}/jsons/playlist_control.json", True)
+    existance_checker("file", f"{target_path}/jsons/playlist_control.json", True)
 
-def load_config() -> dict:
-    """
-    If the configuration already exists, load it and return as dictionary.
-    If not, prompt user for configuration, save and return as dictionary.
-    """
+# def load_config() -> dict:
+#     """
+#     If the configuration already exists, load it and return as dictionary.
+#     If not, prompt user for configuration, save and return as dictionary.
+#     """
 
-    args = get_cli_args()
-    if args.reset_config:
-        return get_config()
+#     args = get_cli_args()
+#     if args.reset_config:
+#         return get_config()
 
-    with open(f"{TARGET_DIR}/jsons/config.json", "r") as file:
-        try:
-            config = json.load(file)
-        except json.JSONDecodeError:
-            return get_config()
+#     with open(f"{TARGET_DIR}/jsons/config.json", "r") as file:
+#         try:
+#             config = json.load(file)
+#         except json.JSONDecodeError:
+#             return get_config()
 
-    return config
+#     return config
 
-def get_config() -> dict:
+# def get_config() -> dict:
     """
     Prompt user for configuration, return it and save it to config.json
     """
@@ -178,7 +183,7 @@ def init_cli_args() -> argparse.Namespace:
         return parser.parse_args()
 
 
-def target_existance_checker(type: str, full_path: str, if_missing_create: bool) -> bool:
+def existance_checker(type: str, full_path: str, if_missing_create: bool) -> bool:
 
     """
     Checks if a target exists, and creates it if missing and requested.\n
@@ -206,24 +211,20 @@ def target_existance_checker(type: str, full_path: str, if_missing_create: bool)
     return exists
 
 
-def url_parser(text_file) -> list:
+def url_parser(url_file_path: str) -> list:
     """
     Parse a text file containing YouTube URLs and return a list of cleaned URLs.\n
     This function reads a text file containing YouTube URLs, processes each line by:
     1. Filtering out lines without valid YouTube URLs
     2. Removing comments (denoted by '--')
     3. Removing leading/trailing whitespace
-
-    Parameters:
-    ----------
-    text_file : str
     """
 
     COMMENT_PATTERN = re.compile("--")
     # Tested url pattern on mobile, the share button returns the full URL
     YT_URL_PATTERN = re.compile("https://www.youtube.com")
 
-    with open(text_file) as file:
+    with open(url_file_path) as file:
         raw_text = file.read()
 
     clean_urls = list()
