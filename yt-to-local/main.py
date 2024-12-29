@@ -6,24 +6,60 @@ from os import path, makedirs
 TARGET_DIR = "/home/phoenix_wsl/repos/yt-to-local/test_target"
 
 def main():
-    config = load_config()
-    preflight_checks(config=config)
-    urls = url_parser("playlist_urls.txt")
-    print(urls, config)
+    args = init_cli_args()
+    if args.setup:
+        setup()
+        exit()
+
+    
 
 
-def preflight_checks(config: dict):
+# setup()
+# create all necessary files and directories
+# get config information from user and save
+# notify that the program can be run normally now
 
-    target_dir = config["target_dir"]
+def setup() -> None:
+    print(f"{"#"*5} Program setup {"#"*5}{"\n"*2}")
 
+    # Get target directory
+    target = input("Enter the full path of the target directory: ").strip()
+
+    # Check if target directory exists
+    if not path.isdir(target):
+        # Notify user that directory doesn't exist
+        print("[!] Path not found, directory and all necessary files will be automatically created.")
+        print(f"Path: {target}")
+        
+        # Ask for user confirmation before creating directory
+        confirmation = input("[?] Do you wish to proceed? (y/n): ").strip()
+        
+        # Exit if user doesn't confirm
+        if not confirmation.lower() in ["y", "yes"]:
+            print("No action taken.")
+            print("[!] Exiting program...")
+            exit()
+
+    # Create all necessary files and directories
+    create_files(target)
+
+    # Save configuration
+    with open(f"{target}/jsons/config.json", "w") as file:
+        json.dump({"target_path": target}, file, indent=4)
+
+    print(f"[!] Configuration saved at {target}/jsons/config.json")
+    print("[!!] Setup complete. You may now run the program normally.")
+
+
+def create_files(target_path : str) -> None:
     # Make sure all necessary directories and files exist
     ## Target directory for all operations
-    target_existance_checker("dir", target_dir, True)
+    target_existance_checker("dir", target_path, True)
     
     ## playlists_urls.txt
-    if not target_existance_checker("file", f"{target_dir}/playlist_urls.txt", False):
+    if not target_existance_checker("file", f"{target_path}/playlist_urls.txt", False):
         # Write default content
-        with open(f"{target_dir}/playlist_urls.txt", "w") as file:
+        with open(f"{target_path}/playlist_urls.txt", "w") as file:
             file.write(
                 (
                 "-- Paste playlists URLs here, separated by new lines\n"
@@ -32,19 +68,19 @@ def preflight_checks(config: dict):
                 )
             )
         
-        print(f"Created file at {target_dir}/playlist_urls.txt")
+        print(f"Created file at {target_path}/playlist_urls.txt")
 
     ## Downloads folder
-    target_existance_checker("dir", f"{target_dir}/downloads", True)
+    target_existance_checker("dir", f"{target_path}/downloads", True)
 
     ## JSONs folder
-    target_existance_checker("dir", f"{target_dir}/jsons", True)
+    target_existance_checker("dir", f"{target_path}/jsons", True)
 
     ## jsons/ config.json
-    target_existance_checker("file", f"{target_dir}/jsons/config.json", True)
+    target_existance_checker("file", f"{target_path}/jsons/config.json", True)
 
     ## jsons/ playlist_control.json
-    target_existance_checker("file", f"{target_dir}/jsons/playlist_control.json", True)
+    target_existance_checker("file", f"{target_path}/jsons/playlist_control.json", True)
 
 def load_config() -> dict:
     """
@@ -63,9 +99,6 @@ def load_config() -> dict:
             return get_config()
 
     return config
-        
-
-
 
 def get_config() -> dict:
     """
@@ -97,9 +130,7 @@ def get_config() -> dict:
 
     return config
     
-
-    
-def get_cli_args() -> argparse.Namespace:
+def init_cli_args() -> argparse.Namespace:
         parser = argparse.ArgumentParser(
             prog="yt-to-local",
             description="Download YouTube playlist's videos to local storage."
@@ -112,11 +143,18 @@ def get_cli_args() -> argparse.Namespace:
         #     help="URL of playlist to download and add to tracker."
         #     )
 
+        # parser.add_argument(
+        #     "-rc", 
+        #     "--reset-config", 
+        #     action="store_true", 
+        #     help="Prompt user for program config."
+        #     )
+
         parser.add_argument(
-            "-rc", 
-            "--reset-config", 
+            "-s", 
+            "--setup", 
             action="store_true", 
-            help="Prompt user for program config."
+            help="Run program setup."
             )
 
         return parser.parse_args()
