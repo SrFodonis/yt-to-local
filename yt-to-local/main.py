@@ -46,7 +46,7 @@ def preflight_checks(config: dict):
     ## jsons/ playlist_control.json
     target_existance_checker("file", f"{target_dir}/jsons/playlist_control.json", True)
 
-def load_config():
+def load_config() -> dict:
     """
     If the configuration already exists, load it and return as dictionary.
     If not, prompt user for configuration, save and return as dictionary.
@@ -88,10 +88,14 @@ def get_config() -> dict:
     config["target_dir"] = target_dir
     print(f"Path: {target_dir} selected")
 
+    # Create all necessary files and directories
+    preflight_checks(config=config)
 
     # Save configuration
     with open(f"{target_dir}/jsons/config.json", "w") as file:
         json.dump(config, file, indent=4) # Pretty print for easier user modification
+
+    return config
     
 
     
