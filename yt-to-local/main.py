@@ -20,7 +20,25 @@ def main():
 # notify that the program can be run normally now
 
 def setup() -> None:
-    print(f"{"#"*5} Program setup {"#"*5}{"\n"*2}")
+
+    """Initialize the application's directory structure and configuration.
+    
+    This function:
+    1. Prompts user for target directory path
+    2. Creates necessary directory structure if it doesn't exist
+    3. Generates initial configuration file
+    4. Saves configuration to JSON file
+    
+    Returns:
+        None
+    
+    Side Effects:
+        - Creates directories and files on filesystem
+        - Writes configuration to config.json
+        - Exits program if user declines directory creation
+    """
+
+    print(f"{"-"*5} Program setup {"-"*5}\n")
 
     # Get target directory
     target = input("Enter the full path of the target directory: ").strip()
