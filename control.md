@@ -165,3 +165,41 @@ target
 			| playlist_control
 			| temp_yt_information
 			| config?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Lmao, so, lets turn this washing machine into the microwave I envisioned.
+
+main.py -s (alias for --setup)
+First time run, single quick check for config flag if it's been run before
+
+main.py normal, managed behaviour. The focus is for it to run as a daemon, so high resiliency and 0 user interativity.

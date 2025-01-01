@@ -11,6 +11,9 @@ def main():
         first_time_setup()
         exit()
 
+    #TODO: check if program has been setup before running, if not, notify user to run setup with "-s" flag
+    # ^ just do a necessary files check, and if they don't exist, notify user to run setup
+
     # Load configuration
     with open(f"{CONFIG_DIR}/config.json", "r") as file:
         config = json.load(file)
