@@ -14,7 +14,7 @@ def main():
 
     # Preflight checks
     ## Check for configuration file
-    if not path.isdir(CONFIG_FILE):
+    if not path.isfile(CONFIG_FILE):
         print("[!] Configuration file not found. Run setup with '-s' flag.")
         exit()
 
