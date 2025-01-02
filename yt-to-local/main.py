@@ -27,6 +27,8 @@ def main():
     print(target_path)
 
     # Bussiness logic
+    #TODO: Get playlist information using YT API
+    # Check gcloud api dashboard for docs and credentials
 
 
 
