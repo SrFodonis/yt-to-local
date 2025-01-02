@@ -4,6 +4,7 @@ import argparse
 from os import path, makedirs, environ
 
 CONFIG_DIR = f"/home/{environ['USER']}/.config/yt-to-local"
+CONFIG_FILE = f"{CONFIG_DIR}/config.json"
 
 def main():
     args = init_cli_args()
@@ -13,15 +14,17 @@ def main():
 
     # Preflight checks
     ## Check for configuration file
-    if not path.isdir(f"{CONFIG_DIR}/config.json"):
+    if not path.isdir(CONFIG_FILE):
         print("[!] Configuration file not found. Run setup with '-s' flag.")
         exit()
 
     # Load configuration
-    with open(f"{CONFIG_DIR}/config.json", "r") as file:
+    with open(CONFIG_FILE, "r") as file:
         config = json.load(file)
 
     target_path = config["target_path"]
+
+    print(target_path)
 
     # Bussiness logic
 
@@ -54,7 +57,7 @@ def run_setup() -> None:
     print(f"{"-"*5} Program setup {"-"*5}\n")
 
     # Get target directory
-    target = input("Enter the full path of the target directory: ").strip()
+    target = input("[<<] Enter the full path of the target directory: ").strip()
 
     # Check if target directory exists
     if not path.isdir(target):
@@ -75,7 +78,7 @@ def run_setup() -> None:
     create_files(target)
 
     # Save configuration
-    with open(f"{target}/jsons/config.json", "w") as file:
+    with open(CONFIG_FILE, "w") as file:
         json.dump({"target_path": target}, file, indent=4)
 
     print(f"\n[!] Configuration saved at {CONFIG_DIR}/config.json")
@@ -110,7 +113,7 @@ def create_files(target_path : str) -> None:
 
     ## Configuration dir and file
     existance_checker("dir", CONFIG_DIR, True)
-    existance_checker("file", f"{CONFIG_DIR}/config.json", True)
+    existance_checker("file", CONFIG_FILE, True)
 
     ## jsons/ playlist_control.json
     existance_checker("file", f"{target_path}/jsons/playlist_control.json", True)
