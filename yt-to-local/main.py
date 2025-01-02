@@ -8,10 +8,11 @@ CONFIG_DIR = f"/home/{environ['USER']}/.config/yt-to-local"
 def main():
     args = init_cli_args()
     if args.setup:
-        first_time_setup()
+        run_setup()
         exit()
 
-    # Check for configuration file
+    # Preflight checks
+    ## Check for configuration file
     if not path.isdir(f"{CONFIG_DIR}/config.json"):
         print("[!] Configuration file not found. Run setup with '-s' flag.")
         exit()
@@ -22,13 +23,16 @@ def main():
 
     target_path = config["target_path"]
 
+    # Bussiness logic
+
+
 
 # setup()
 # create all necessary files and directories
 # get config information from user and save
 # notify that the program can be run normally now
 
-def first_time_setup() -> None:
+def run_setup() -> None:
 
     """Initialize the application's directory structure and configuration.
     
@@ -74,8 +78,9 @@ def first_time_setup() -> None:
     with open(f"{target}/jsons/config.json", "w") as file:
         json.dump({"target_path": target}, file, indent=4)
 
-    print(f"[!] Configuration saved at {target}/jsons/config.json")
-    print("[!!] Setup complete. You may now run the program normally.")
+    print(f"\n[!] Configuration saved at {CONFIG_DIR}/config.json")
+    print(f"[!!] Setup complete. Please add the URLs to {target}/playlist_urls.txt")
+    print("[!!] The program may now be run normally.")
 
 
 def create_files(target_path : str) -> None:
@@ -95,7 +100,7 @@ def create_files(target_path : str) -> None:
                 )
             )
         
-        print(f"Created file at {target_path}/playlist_urls.txt")
+        print(f"[>] Created file at {target_path}/playlist_urls.txt")
 
     ## Downloads folder
     existance_checker("dir", f"{target_path}/downloads", True)
@@ -133,30 +138,30 @@ def create_files(target_path : str) -> None:
     Prompt user for configuration, return it and save it to config.json
     """
 
-    config = dict()
+    # config = dict()
 
-    # Get target directory
-    print("\nPlease enter the following information to configure the program:\n")
-    target_dir = input("Enter the full path of the target directory: ")
-    if not path.isdir(target_dir):
-        print("Path not found, directory and all necessary files will be automatically created.")
-        print(f"Path: {target_dir}")
-        confirmation = input("Do you wish to proceed? (y/n): ")
-        if not confirmation.lower() in ["y", "yes"]:
-            print("Exiting program...")
-            exit()
+    # # Get target directory
+    # print("\nPlease enter the following information to configure the program:\n")
+    # target_dir = input("Enter the full path of the target directory: ")
+    # if not path.isdir(target_dir):
+    #     print("Path not found, directory and all necessary files will be automatically created.")
+    #     print(f"Path: {target_dir}")
+    #     confirmation = input("Do you wish to proceed? (y/n): ")
+    #     if not confirmation.lower() in ["y", "yes"]:
+    #         print("Exiting program...")
+    #         exit()
 
-    config["target_dir"] = target_dir
-    print(f"Path: {target_dir} selected")
+    # config["target_dir"] = target_dir
+    # print(f"Path: {target_dir} selected")
 
-    # Create all necessary files and directories
-    preflight_checks(config=config)
+    # # Create all necessary files and directories
+    # preflight_checks(config=config)
 
-    # Save configuration
-    with open(f"{target_dir}/jsons/config.json", "w") as file:
-        json.dump(config, file, indent=4) # Pretty print for easier user modification
+    # # Save configuration
+    # with open(f"{target_dir}/jsons/config.json", "w") as file:
+    #     json.dump(config, file, indent=4) # Pretty print for easier user modification
 
-    return config
+    # return config
 
 
 def init_cli_args() -> argparse.Namespace:
@@ -211,7 +216,7 @@ def existance_checker(type: str, full_path: str, if_missing_create: bool) -> boo
         elif type.lower() == "file":
             open(full_path, 'a').close()
 
-        print(f"Created {type} at {full_path}")
+        print(f"[>] Created {type} at {full_path}")
         return True
         
     return exists
