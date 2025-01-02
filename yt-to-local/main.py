@@ -11,8 +11,10 @@ def main():
         first_time_setup()
         exit()
 
-    #TODO: check if program has been setup before running, if not, notify user to run setup with "-s" flag
-    # ^ just do a necessary files check, and if they don't exist, notify user to run setup
+    # Check for configuration file
+    if not path.isdir(f"{CONFIG_DIR}/config.json"):
+        print("[!] Configuration file not found. Run setup with '-s' flag.")
+        exit()
 
     # Load configuration
     with open(f"{CONFIG_DIR}/config.json", "r") as file:
@@ -155,7 +157,8 @@ def create_files(target_path : str) -> None:
         json.dump(config, file, indent=4) # Pretty print for easier user modification
 
     return config
-    
+
+
 def init_cli_args() -> argparse.Namespace:
         parser = argparse.ArgumentParser(
             prog="yt-to-local",
