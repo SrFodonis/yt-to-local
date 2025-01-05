@@ -81,7 +81,7 @@ def run_setup() -> None:
         confirmation = input("[?] Do you wish to proceed? (y/n): ").strip()
         
         # Exit if user doesn't confirm
-        if not confirmation.lower() in ["y", "yes"]:
+        if confirmation.lower() not in ["y", "yes"]:
             print("No action taken.")
             print("[!] Exiting program...")
             exit()
