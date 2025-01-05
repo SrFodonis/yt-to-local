@@ -1,8 +1,10 @@
 import re
 import json
 import argparse
+import constants
 from os import path, makedirs, environ
 
+YT_API_KEY = constants.YT_API_KEY
 CONFIG_DIR = f"/home/{environ['USER']}/.config/yt-to-local"
 CONFIG_FILE = f"{CONFIG_DIR}/config.json"
 
