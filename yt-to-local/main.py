@@ -27,12 +27,23 @@ def main():
 
     target_path = config["target_path"]
 
-    print(target_path)
-
     # Bussiness logic
     #TODO: Get playlist information using YT API
-    # Check gcloud api dashboard for docs and credentials
+    # Check gcloud api dashboard for docs and credentials)
+    urls = url_parser(f"{target_path}/playlist_urls.txt")
 
+    playlists = list()
+
+    for url in urls:
+        playlists.append(
+            get_playlist_info(
+                extract_playlist_id(url),
+                YT_API_KEY
+                )
+        )
+
+    for playlist in playlists:
+        print(f"Title: {playlist["items"][0]["snippet"]["title"]}")
 
 
 # setup()
@@ -281,6 +292,25 @@ def url_parser(url_file_path: str) -> list:
 
     return clean_urls
 
+
+def extract_playlist_id(url: str) -> str:
+    """
+    Extract the playlist ID from a YouTube playlist URL.
+    """
+
+    # Pattern for playlist URLs
+    playlist_pattern = re.compile(r"list=([A-Za-z0-9_-]+)")
+
+    # Search for the pattern in the URL
+    playlist_id = playlist_pattern.search(url)
+
+    # If no match is found, return None
+    if not playlist_id:
+        return None
+
+    # group(1) returns the first captured group in parentheses ([A-Za-z0-9_-]+)
+    # For example, in URL "...list=PL1234...", it returns "PL1234"
+    return playlist_id.group(1)
 
 def get_playlist_info(playlist_id: str, yt_api_key: str) -> dict:
     """
