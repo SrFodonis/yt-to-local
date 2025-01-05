@@ -3,6 +3,7 @@ constants.py
 
 # Testing
 playground/*
+example.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
