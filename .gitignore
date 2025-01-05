@@ -1,3 +1,7 @@
+# No-no files
+constants.py
+
+# Testing
 playground/*
 
 # Byte-compiled / optimized / DLL files
