@@ -33,6 +33,8 @@ def main():
 
     with open("example.json", "w") as file:
         file.write(json.dumps(response, indent=4))
+    
+    print(f"Playlist title: {response['items'][0]['snippet']['title']}")
 
 if __name__ == "__main__":
     main()
