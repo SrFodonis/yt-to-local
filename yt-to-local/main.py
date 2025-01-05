@@ -4,6 +4,7 @@ import argparse
 import constants
 import googleapiclient.discovery
 from os import path, makedirs, environ
+from dataclasses import dataclass
 
 YT_API_KEY = constants.YT_API_KEY
 CONFIG_DIR = f"/home/{environ['USER']}/.config/yt-to-local"
@@ -45,11 +46,6 @@ def main():
     for playlist in playlists:
         print(f"Title: {playlist["items"][0]["snippet"]["title"]}")
 
-
-# setup()
-# create all necessary files and directories
-# get config information from user and save
-# notify that the program can be run normally now
 
 def run_setup() -> None:
 
@@ -312,6 +308,7 @@ def extract_playlist_id(url: str) -> str:
     # For example, in URL "...list=PL1234...", it returns "PL1234"
     return playlist_id.group(1)
 
+
 def get_playlist_info(playlist_id: str, yt_api_key: str) -> dict:
     """
     Get playlist information from YouTube API and return as dictionary.
@@ -334,6 +331,18 @@ def get_playlist_info(playlist_id: str, yt_api_key: str) -> dict:
 
     return response
 
+
+@dataclass
+class playlist:
+    title: str
+    id: str
+    videos: list
+
+@dataclass
+class video:
+    title: str
+    id: str
+    url: str
 
 if __name__=="__main__":
     main()
