@@ -1,0 +1,188 @@
+{
+    "kind": "youtube#playlistItemListResponse",
+    "etag": "NJvsDv5PZuoE9fdq8P3IR283gko",
+    "items": [
+        {
+            "kind": "youtube#playlistItem",
+            "etag": "bQt5ZifaXXOMla6pLfL7YzZOkFw",
+            "id": "UExobWFDVExRdGlfQlVEeWlZZERIYWU3YkVyWFpaZEdTZS41NkI0NEY2RDEwNTU3Q0M2",
+            "snippet": {
+                "publishedAt": "2024-08-06T08:59:18Z",
+                "channelId": "UC7RfDSxXAS1xSfRy8m5-alQ",
+                "title": "Dj Loli [Original]",
+                "description": "Bienvenido al canal y a \u00e9ste video \u00a1espero y lo disfrutes! :]\n\nFuente twitch: https://www.twitch.tv/videos/1199228457\n\n[-) Redes sociales: https://linktr.ee/GamsterGaming",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/VrgGi7Va33Y/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/VrgGi7Va33Y/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/VrgGi7Va33Y/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/VrgGi7Va33Y/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/VrgGi7Va33Y/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "Fodd",
+                "playlistId": "PLhmaCTLQti_BUDyiYdDHae7bErXZZdGSe",
+                "position": 0,
+                "resourceId": {
+                    "kind": "youtube#video",
+                    "videoId": "VrgGi7Va33Y"
+                },
+                "videoOwnerChannelTitle": "Gamster Gaming",
+                "videoOwnerChannelId": "UCcj5uTX8Z1xGB0pGm_X52XQ"
+            }
+        },
+        {
+            "kind": "youtube#playlistItem",
+            "etag": "r-FF-tpBSCYlA0BGxA7lfVfD-8A",
+            "id": "UExobWFDVExRdGlfQlVEeWlZZERIYWU3YkVyWFpaZEdTZS4yODlGNEE0NkRGMEEzMEQy",
+            "snippet": {
+                "publishedAt": "2024-08-06T08:59:24Z",
+                "channelId": "UC7RfDSxXAS1xSfRy8m5-alQ",
+                "title": "DJ Loli/\u00c9xtasis",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/Ya-QtpZjGBo/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/Ya-QtpZjGBo/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/Ya-QtpZjGBo/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/Ya-QtpZjGBo/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    }
+                },
+                "channelTitle": "Fodd",
+                "playlistId": "PLhmaCTLQti_BUDyiYdDHae7bErXZZdGSe",
+                "position": 1,
+                "resourceId": {
+                    "kind": "youtube#video",
+                    "videoId": "Ya-QtpZjGBo"
+                },
+                "videoOwnerChannelTitle": "TAY",
+                "videoOwnerChannelId": "UCmz1XeVQ8tHpfBCWqigT0qQ"
+            }
+        },
+        {
+            "kind": "youtube#playlistItem",
+            "etag": "_yeiGVaE5hVIct2UlFMCvyFU1N8",
+            "id": "UExobWFDVExRdGlfQlVEeWlZZERIYWU3YkVyWFpaZEdTZS4wMTcyMDhGQUE4NTIzM0Y5",
+            "snippet": {
+                "publishedAt": "2024-08-06T09:04:35Z",
+                "channelId": "UC7RfDSxXAS1xSfRy8m5-alQ",
+                "title": "DJ Loli/Taca a Xereca pra Mim",
+                "description": "",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/fBsXYe1oc2A/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/fBsXYe1oc2A/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/fBsXYe1oc2A/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/fBsXYe1oc2A/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    },
+                    "maxres": {
+                        "url": "https://i.ytimg.com/vi/fBsXYe1oc2A/maxresdefault.jpg",
+                        "width": 1280,
+                        "height": 720
+                    }
+                },
+                "channelTitle": "Fodd",
+                "playlistId": "PLhmaCTLQti_BUDyiYdDHae7bErXZZdGSe",
+                "position": 2,
+                "resourceId": {
+                    "kind": "youtube#video",
+                    "videoId": "fBsXYe1oc2A"
+                },
+                "videoOwnerChannelTitle": "TAY",
+                "videoOwnerChannelId": "UCmz1XeVQ8tHpfBCWqigT0qQ"
+            }
+        },
+        {
+            "kind": "youtube#playlistItem",
+            "etag": "JbKfk0JiA-W1uvHZ2yQ0UBtXkv8",
+            "id": "UExobWFDVExRdGlfQlVEeWlZZERIYWU3YkVyWFpaZEdTZS41MjE1MkI0OTQ2QzJGNzNG",
+            "snippet": {
+                "publishedAt": "2024-12-07T23:33:26Z",
+                "channelId": "UC7RfDSxXAS1xSfRy8m5-alQ",
+                "title": "DJ Loli/La Chona",
+                "description": "Cr\u00e9ditos a gamstergaming",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/D0V28wwgJ7I/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/D0V28wwgJ7I/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/D0V28wwgJ7I/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    },
+                    "standard": {
+                        "url": "https://i.ytimg.com/vi/D0V28wwgJ7I/sddefault.jpg",
+                        "width": 640,
+                        "height": 480
+                    }
+                },
+                "channelTitle": "Fodd",
+                "playlistId": "PLhmaCTLQti_BUDyiYdDHae7bErXZZdGSe",
+                "position": 3,
+                "resourceId": {
+                    "kind": "youtube#video",
+                    "videoId": "D0V28wwgJ7I"
+                },
+                "videoOwnerChannelTitle": "TAY",
+                "videoOwnerChannelId": "UCmz1XeVQ8tHpfBCWqigT0qQ"
+            }
+        }
+    ],
+    "pageInfo": {
+        "totalResults": 4,
+        "resultsPerPage": 5
+    }
+}

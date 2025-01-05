@@ -2,6 +2,7 @@ import re
 import json
 import argparse
 import constants
+import googleapiclient.discovery
 from os import path, makedirs, environ
 
 YT_API_KEY = constants.YT_API_KEY
@@ -279,6 +280,29 @@ def url_parser(url_file_path: str) -> list:
         clean_urls.append(clean_line)
 
     return clean_urls
+
+
+def get_playlist_info(playlist_id: str, yt_api_key: str) -> dict:
+    """
+    Get playlist information from YouTube API and return as dictionary.
+    """
+
+    api_service_name = "youtube"
+    api_version = "v3"
+
+    youtube = googleapiclient.discovery.build(
+        api_service_name,
+        api_version,
+        developerKey = yt_api_key
+        )
+
+    request = youtube.playlistItems().list(
+        part="snippet",
+        playlistId=playlist_id
+    )
+    response = request.execute()
+
+    return response
 
 
 if __name__=="__main__":
