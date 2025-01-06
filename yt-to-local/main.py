@@ -37,7 +37,7 @@ def main():
 
     for url in urls:
         playlists.append(
-            fetch_playlist_data(extract_playlist_id(url))
+            get_playlist(url)
         )
 
     for playlist in playlists:
@@ -343,9 +343,42 @@ class video:
 
 def get_playlist(url: str) -> playlist:
     """
-    
+    Retrieves and constructs a playlist object from a YouTube playlist URL.
+    Args:
+        url (str): The YouTube playlist URL to fetch data from
+    Returns:
+        playlist: A playlist object containing the playlist metadata and list of video objects
+    Example:
+        >>> url = "https://www.youtube.com/playlist?list=PLExample123"
+        >>> my_playlist = get_playlist(url)
+        >>> print(my_playlist.title)
+        'My Playlist Title'
     """
     
+    # Extract playlist ID from URL
+    playlist_id = extract_playlist_id(url)
+
+    # Get playlist data from YouTube API
+    playlist_data = fetch_playlist_data(playlist_id)
+
+    # Build playlist object
+    _playlist = playlist(
+        title=playlist_data["items"][0]["snippet"]["title"],
+        id=playlist_id,
+        videos=list()
+    )
+
+    # Build video objects
+    for item in playlist_data["items"]:
+        _video = video(
+            title=item["snippet"]["title"],
+            id=item["snippet"]["resourceId"]["videoId"],
+            url=f"https://www.youtube.com/watch?v={item['snippet']['resourceId']['videoId']}"
+        )
+
+        _playlist.videos.append(_video)
+
+    return _playlist
 
 
 
