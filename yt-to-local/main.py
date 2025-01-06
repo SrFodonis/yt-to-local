@@ -29,8 +29,6 @@ def main():
     target_path = config["target_path"]
 
     # Bussiness logic
-    #TODO: Get playlist information using YT API
-    # Check gcloud api dashboard for docs and credentials)
     urls = url_parser(f"{target_path}/playlist_urls.txt")
 
     playlists = list()
@@ -41,7 +39,9 @@ def main():
         )
 
     for playlist in playlists:
-        print(f"Title: {playlist["items"][0]["snippet"]["title"]}")
+        print(f"Title: {playlist.title}")
+        print(f"ID: {playlist.id}")
+        print(f"Videos: {len(playlist.videos)}")
 
 
 def run_setup() -> None:
