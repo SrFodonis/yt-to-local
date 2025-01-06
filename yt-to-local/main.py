@@ -37,10 +37,7 @@ def main():
 
     for url in urls:
         playlists.append(
-            get_playlist_info(
-                extract_playlist_id(url),
-                YT_API_KEY
-                )
+            get_playlist_info(extract_playlist_id(url))
         )
 
     for playlist in playlists:
@@ -309,7 +306,7 @@ def extract_playlist_id(url: str) -> str:
     return playlist_id.group(1)
 
 
-def get_playlist_info(playlist_id: str, yt_api_key: str) -> dict:
+def get_playlist_info(playlist_id: str) -> dict:
     """
     Get playlist information from YouTube API and return as dictionary.
     """
@@ -320,7 +317,7 @@ def get_playlist_info(playlist_id: str, yt_api_key: str) -> dict:
     youtube = googleapiclient.discovery.build(
         api_service_name,
         api_version,
-        developerKey = yt_api_key
+        developerKey = YT_API_KEY
         )
 
     request = youtube.playlistItems().list(
@@ -343,6 +340,14 @@ class video:
     title: str
     id: str
     url: str
+
+def package_playlist(url: str) -> playlist:
+    """
+    
+    """
+    
+
+
 
 if __name__=="__main__":
     main()
