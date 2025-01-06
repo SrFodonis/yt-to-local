@@ -37,7 +37,7 @@ def main():
 
     for url in urls:
         playlists.append(
-            get_playlist_info(extract_playlist_id(url))
+            fetch_playlist_data(extract_playlist_id(url))
         )
 
     for playlist in playlists:
@@ -306,7 +306,7 @@ def extract_playlist_id(url: str) -> str:
     return playlist_id.group(1)
 
 
-def get_playlist_info(playlist_id: str) -> dict:
+def fetch_playlist_data(playlist_id: str) -> dict:
     """
     Get playlist information from YouTube API and return as dictionary.
     """
@@ -341,7 +341,7 @@ class video:
     id: str
     url: str
 
-def package_playlist(url: str) -> playlist:
+def get_playlist(url: str) -> playlist:
     """
     
     """
