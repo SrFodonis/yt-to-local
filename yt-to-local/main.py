@@ -33,15 +33,28 @@ def main():
 
     playlists = list()
 
+    ## Get playlist data
     for url in urls:
         playlists.append(
             get_playlist(url)
         )
 
+    # Debugging, remove later
     for playlist in playlists:
         print(f"Title: {playlist.title}")
         print(f"ID: {playlist.id}")
         print(f"Videos: {len(playlist.videos)}")
+
+    # Compare playlist data with control file
+
+
+    # Download videos
+
+
+    # Delete videos not in playlist
+
+
+    # Update playlist control file
 
 
 def run_setup() -> None:
